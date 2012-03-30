@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>{{note.topic}}</title>
+<link href="/static/css/note.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header><h1>{{note.topic}}</h1></header>
+<nav></nav>
+<article>
+<section id="edit">
+<input id="edit-button" type="button" value="edit" />
+<form   action="/note/sync/" method="GET">
+<input id="id" name="id" type="hidden" value="{{note.id}}" />
+<textarea id="content" name="content" >{{note.content}}</textarea>
+<input id="save-note-button" type="submit" value="save" />
+</form>
+</section>
+<!--
+<svg xmlns="" xmlns:xlink="" width="500px" height="300px">
+  <image  x="0" y="0" xlink:href="http://img3.douban.com/icon/u38064869-5.jpg"></image>
+</svg>
+-->
+</article>
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery-min.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/note.js"></script>
+</body>
+</html>

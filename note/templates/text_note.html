@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{{note.topic}}</title>
+
+{% for css in mods.css %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/{{css}}">
+{% endfor %}
+<link href="/static/css/text_note.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+{% for t in mods.tm %}
+{% include t %}
+{% endfor %}
+<div class="article">
+  <div class="topics"></div>
+  <section >
+	<form   class="content-form" action="/note/sync/" method="POST">
+	  {% csrf_token %}
+	  <div class="hidden">
+		<input id="id" name="id"  value="{{note.id}}" />
+		<input id="note_type" name="note_type" value="0"/>
+	  </div>
+	  <input id="topic" name="topic" value="{{note.topic}}" />
+	  <textarea id="content" name="content" >{{note.content}}</textarea>
+	  <input id="save-note-button" class="button" type="submit" value="保存" />
+	</form>
+  </section>
+</div>
+{% include 'footer.mod.html' %}
+{% for js in mods.js %}
+<script type="text/javascript" src="{{STATIC_URL}}js/{{js}}" ></script>
+{% endfor %}
+<script type="text/javascript" src="{{STATIC_URL}}js/text_note.js"></script>
+</body>
+</html>

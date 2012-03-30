@@ -1,0 +1,6 @@
+input[type=submit]{
+cursor:pointer;
+}
+.hidden {
+display:none;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% for css in mods.css %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/{{css}}">
+{% endfor %}
+<link href="/static/css/notes.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+{% for t in mods.tm %}
+{% include t %}
+{% endfor %}
+
+
+{% include 'footer.mod.html' %}
+
+<div style="display:none;">
+  <div id="note-item-tpl">
+	<li class="{2}"><a href="/note/id/{0}" >{1}</a></li>
+  </div>
+  <div id="micro-item-tpl">
+	
+	<li class="{3}">
+	  
+	  <a href="/note-micro/t/{1}/">
+		<span  title="{1}">{2}</span>
+	  </a>
+<div class="alert-doudou"><div >100</div></div>
+	</li>	
+	
+  </div>
+  <span id="query-label-tpl">搜索主题：[{0}]</span>
+</div>
+
+{% for i in asks %}
+<a href="/ask/{{i.id}}">{{i.name}}</a>
+{% endfor%}
+{% for js in mods.js %}
+<script type="text/javascript" src="{{STATIC_URL}}js/{{js}}" ></script>
+{% endfor %}
+
+<script type="text/javascript" src="{{STATIC_URL}}js/notes.js"></script>
+<script>
+
+</script>
+</body>
+</html>
+
+

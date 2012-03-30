@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+{% for css in mods.css %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/{{css}}">
+{% endfor %}
+<link href="/static/css/notes.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+{% for t in mods.tm %}
+{% include t %}
+{% endfor %}
+
+<div class="note-article note-head-margin" >
+    <div id="late-10-note" class="note-article-area" >
+	<div class="note-area-head">
+	  <div class="label">最新的笔记</div>
+	</div>
+	<ul>
+	</ul>
+  </div>
+
+  <div id="note-has-topic" class="note-article-area">
+	<div class="note-area-head">
+	  <div class="label">搜索主题：</div>
+	</div>
+	<ul></ul>
+  </div>
+</div>
+<div  class="microNote note-head-margin">
+  <div class="note-area-head">
+	<div class="label">
+	  <a href="#"><span class="microNote-label-addIcon">十</span></a>
+	  <span>微笔记</span>
+	</div>
+  </div>
+  <ul></ul>
+  <div class="microNote-form">
+	<form action="/note-micro/a/" method="POST">{% csrf_token %}
+	  <div class="microNote-form-closeIcon"><span >X</span></div>
+	  <label >主题：</label>
+	  <input name="topic" />
+	  <label>微语：</label>
+	  <textarea name="word"></textarea>
+	  <input type="submit" value="发布" />
+	</form>
+  </div>
+</div>
+
+{% include 'footer.mod.html' %}
+
+<div style="display:none;">
+  <div id="note-item-tpl">
+	<li class="{2}"><a href="/note/id/{0}" >{1}</a></li>
+  </div>
+  <div id="micro-item-tpl">
+	<li class="{3}">
+	  <a href="/note-micro/t/{1}/">
+		<div  title="{1}">{2}</div>
+	  </a>
+	  <div class="alert-doudou"><div >00</div></div>
+	</li>	
+  </div>
+  <span id="query-label-tpl">搜索主题：[{0}]</span>
+</div>
+{% for js in mods.js %}
+<script type="text/javascript" src="{{STATIC_URL}}js/{{js}}" ></script>
+{% endfor %}
+<script type="text/javascript" src="{{STATIC_URL}}js/notes.js"></script>
+<script>
+
+</script>
+</body>
+</html>

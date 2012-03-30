@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% block css%}
+<link rel="stylesheet"  href="{{STATIC_URL}}css/reset.css">
+<link rel="stylesheet"  href="{{STATIC_URL}}css/head.mod.css">
+<link rel="stylesheet"  href="{{STATIC_URL}}css/footer.mod.css">
+{% endblock %}
+</head>
+<body>
+  <nav id="nav">
+    <div id="menus">
+	  <ul>
+		<li ><a href="/">主页</a></li>
+        <li ><a href="/note" >笔记</a>
+		</li>
+		<li ><a href="/ask" >问答</a>
+		</li>
+		<li ><a href="#" >计划</a>
+		</li>
+		<li>
+		  <a href="#" >..</a>
+		</li>
+		<li ><a href="#" >..</a>
+		</li>
+		<li>
+		  <a href="#" >关于</a>
+		</li>
+      </ul>
+    </div>
+    <div id="search">
+      <form id="searchForm" action="/note/topic" method="GET">
+		<input type="search"  placeholder="查询笔记"  size="35" maxlength="50" name="name" />
+	  </form>
+    </div>
+  </nav>
+{%  block content %}
+ empty
+{% endblock %}
+
+<div class="footer">
+  <span>copyright@2012秦木工</span>
+  <a href="#">powered by django,mysql</a>
+</div>
+
+{% block js %}
+<script  src="{{STATIC_URL}}js/jquery-min.js"></script>
+<script  src="{{STATIC_URL}}js/tpls.js"></script>
+<script  src="{{STATIC_URL}}js/head.mod.js"></script>
+{% endblock %}
+</body>
+</html>
+

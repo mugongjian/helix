@@ -1,0 +1,90 @@
+.note-article{
+	float:left;
+	width:66%;
+}
+.note-article-area{
+	height:230px;
+	border:solid 2px #EEE;
+	margin-bottom:2px;
+	margin-left:4px;
+	line-height:1.35em;
+}
+.note-article-area a{
+	color:#666;
+}
+.note-article-area li:hover{
+	opacity:0.7;
+}
+.microNote{
+	float:right;
+	width:33%;
+	height:465px;
+	margin-right:2px;
+}
+.microNote ul{
+
+	font:0.9em Arial,Helvetica,"宋体",sans-serif;
+	line-height:22px;
+	padding:1px;
+	margin:0;
+	overflow:auto;
+	height:445px;
+	width:100%;
+}
+.microNote li{
+	margin:2px 4px;
+	border:solid 1px #BBD;
+	border-top-left-radius:12px;
+	border-bottom-right-radius:12px;
+}
+.microNote-form {
+	display:none;
+	width:200px;
+	height:200px;
+}
+.microNote-label-addIcon {
+	float:left;
+	margin:2px 6px;
+	color:#BBB;
+	
+}
+.microNote-label-addIcon:hover{
+	color:#EEE;
+}
+.microNote-form,.microNote-form *{
+	width:98%;
+	margin:2px;
+	opacity:0.9;
+}
+.microNote-form input[name=topic]{
+	border-top:none;
+	border-left:none;
+	border-right:none;
+	display:inline-block;
+	background:#EEE;
+}
+.microNote-form-closeIcon{
+	text-align:right;
+	background:#3C72BC;
+	font-weight:bold;
+	width:100%;
+}
+.microNote-form-closeIcon span{
+	color:#F33;
+	margin-right:6px;
+}
+.microNote-form-closeIcon span:hover{
+	background:#0061ab;
+	color:#F00;
+	cursor:pointer;
+}
+.microNote-form>form>textarea{
+	border:none;
+	background:#EEE;
+	height:200px;
+}
+.microNote-form>form{
+	-moz-box-shadow:2px 2px 10px #06c;
+	-webkit-box-shadow:2px 2px 10px #06c;
+	box-shadow:2px 2px 10px #06c;
+}

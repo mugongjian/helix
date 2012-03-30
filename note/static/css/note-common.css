@@ -1,0 +1,116 @@
+/* more tag reset*/
+a{
+	text-decoration:none;
+}
+
+.hidden{
+	display:none;
+}
+/* color define*/
+.rainbow-red{
+	background-color:#F38088;
+}
+.rainbow-red a{
+	color:#DDD;
+}
+.rainbow-orange{
+	background-color:#F36A22;
+}
+.rainbow-orange a{
+	color:#B5C4B4;
+}
+.rainbow-yellow{
+	background-color:#F2F194;
+}
+.rainbow-yellow a{
+	color:#222;
+}
+.rainbow-green{
+	background-color:#8EC63C;
+}
+.rainbow-green a{
+	color:#111;
+}
+.rainbow-blue{
+	background-color:#21B4F9;
+}
+.rainbow-blue a{
+	color:#DDD;
+}
+.rainbow-indigo{
+	background-color:#A4D8E3;
+}
+.rainbow-indigo a{
+	color:#555;
+}
+.rainbow-puple{
+	background-color:#A44D94;
+}
+.rainbow-puple a {
+	color:#DDD;
+}
+/* common */
+.note-head-margin{
+	margin-top:2px;
+}
+.note-area-head{
+	height:20px;
+	border-top-left-radius:4px;
+	border-top-right-radius:4px;
+	background-color:#BBB;
+}
+.note-area-head .label{
+	height:20px;
+	color:#EEE;
+	background-color:#555;
+	font-size:0.8em;
+	font-weight:bold;
+	text-align:center;
+	border-top-left-radius:4px;
+	border-top-right-radius:4px;
+
+}
+.gridLine1{
+	color:#111;
+	background-color:#EFEFEF;
+}
+.gridLine2{
+	color:#111;
+	background-color:#DEE3E7;
+}
+
+.alert-doudou{
+	position:relative;
+	top:0px;
+	left:0px;
+	width:20px;
+	height:20px;
+	border-radius:10px;
+	opacity:0.9;
+	background-color:#333;	
+}
+.alert-doudou>div{
+	position:relative;
+	left:2px;
+	top:2px;
+	border-radius:8px;
+	background-color:red;
+	width:16px;
+	height:16px;
+	
+	display:box;
+	displat:-moz-box;
+	font-size:0.5em;
+	line-height:1.8em;
+	color:white;
+	text-align:center;
+	-moz-box-pack:center;
+	-moz-box-align:center;
+	box-pack:center;
+	box-align:center;
+	text-shadow:1px 1px 1px #000;
+	
+	-moz-box-orient:horizontal;
+	box-orient:horizontal;
+	cursor:pointer;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% for css in mods.css %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/{{css}}">
+{% endfor %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/micro-topic.css">
+<style>
+.tip {
+display:inline-block;
+padding:0;
+}
+
+.tip-content{
+display:block;
+padding:0.6em;
+border-radius:4px;
+color:white;
+background-color:#0A0;
+cursor:pointer;
+}
+.tip-content:hover{
+background-color:#0c0;
+}
+.tip-downArrow{
+position:relative;
+top:-0.7em;
+left:16px;
+color:#0A0;
+font-size:1em;
+padding:0;
+margin:0;
+line-height:1em;
+}
+.tip-upArrow {
+position:relative;
+top:0.7em;
+left:16px;
+color:#0A0;
+font-size:1em;
+padding:0;
+margin:0;
+line-height:1em;
+}
+</style>
+</head>
+<body>
+{% for t in mods.tm %}
+{% include t %}
+{% endfor %}
+<canvas id="micro-list"  width="600" height="300" class="note-head-margin"> </canvas>
+<div class="tip">
+<span  class="tip-upArrow">◆</span>
+<span class="tip-content">abcdefghijkffff<div></div>fdfdf</span>
+<span  class="tip-downArrow">◆</span>
+</div>
+{% include 'footer.mod.html'%}
+{% for js in mods.js %}
+<script type="text/javascript" src="{{STATIC_URL}}js/{{js}}" ></script>
+{% endfor %}
+<script>
+{% autoescape off %}
+var micro = {{micro}}[0];
+{% endautoescape %}
+</script>
+<script src="{{STATIC_URL}}js/micro-topic.js"></script>
+</body>
+</html>

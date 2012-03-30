@@ -1,0 +1,13 @@
+.topic{
+color:#555;
+opacity:0.5;
+}
+.is{
+	color:#1a751a;
+}
+.diff{
+
+}
+.diff-item{
+	text-decoration: line-through;
+}

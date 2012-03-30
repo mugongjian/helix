@@ -1,0 +1,21 @@
+<h1>{{doudou}}</h1>
+<form action="">
+<input type="submit" value="aa" />
+</form>
+<script src="/static/js/jquery.js"> </script>
+<input type="button" value="bind" />
+<input type="button" value="unbind" />
+<script>
+  $(function(){
+  $('[value=bind]').on('click',function(){
+  $('form').on('submit',function(){
+  alert('');
+  return false;
+  });
+  
+  });
+  $('[value=unbind]').on('click',function(){
+  $('form').off('submit');
+  });
+})
+</script>

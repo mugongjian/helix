@@ -1,0 +1,21 @@
+<html>
+<head>
+{% for css in mods.css %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/note.css"/>
+{% endfor %}
+</head>
+<body>
+<script> time=new Date().get</script>
+{% for t in mods.tm %}
+{% include t %}
+{% endfor %}
+
+{% for js in mods.js %}
+<script type="javascript" src="{{STATIC_URL}}js/{{js}}" ></script>
+{% endfor %}
+<script>time2 = new Date();
+alert(time2-time);
+</script>
+
+</body>
+</html>

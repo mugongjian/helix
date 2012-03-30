@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet"  href="{{STATIC_URL}}css/note-common.css">
+<link rel="stylesheet"  href="{{STATIC_URL}}css/notes.css"  >
+{% endblock css %}
+
+{%  block content %}
+<div class="note-article note-head-margin" >
+    <div id="late-10-note" class="note-article-area" >
+	<div class="note-area-head">
+	  <div class="label">最新的笔记</div>
+	</div>
+	<ul>
+	</ul>
+  </div>
+
+  <div id="note-has-topic" class="note-article-area">
+	<div class="note-area-head">
+	  <div class="label">搜索主题：</div>
+	</div>
+	<ul></ul>
+  </div>
+</div>
+<div  class="microNote note-head-margin">
+  <div class="note-area-head">
+	<div class="label">
+	  <a href="#"><span class="microNote-label-addIcon">十</span></a>
+	  <span>微笔记</span>
+	</div>
+  </div>
+  <ul></ul>
+  <div class="microNote-form">
+	<form action="/note-micro/a/" method="POST">
+	  <div style="display:none">
+		{% csrf_token %}
+		<div class="microNote-form-closeIcon"><span >X</span></div>
+		<label >主题：</label>
+		<input name="topic" />
+		<label>微语：</label>
+		<textarea name="word"></textarea>
+		<input type="submit" value="发布" />
+	</form>
+	</div>
+  </div>
+</div>
+{% endblock content %}
+{% block js %}
+{% include "note-list-item.html" %}
+{{ block.super }}
+<script  src="{{STATIC_URL}}js/notes.js"></script>
+{% endblock js %}
+
+

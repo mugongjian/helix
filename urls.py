@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
-
+from django.views.generic.base import TemplateView
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -8,7 +8,7 @@ urlpatterns = patterns(
     '',
     # Examples:
         
-    url(r'^$', 'main.views.home'),
+    url(r'^$', TemplateView.as_view( template_name="base_home.html")),
     url(r'^topic/',include('topic.urls')),                   
     url(r'^note/', include('note.urls')),
     url(r'^note-micro/',include('note.urls')),                   

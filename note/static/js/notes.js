@@ -1,3 +1,6 @@
+/*
+ 微笔记接口定义
+*/
 window.micro = function(conf) {
 	var renderMicro = function(data) {
 		var i;
@@ -22,8 +25,13 @@ window.micro = function(conf) {
 			var i;
 			var formData = {};
 			for(i=0; i<data.length; i++) {
+				if( ! data[i].value ) {
+					return data[i].name+'不能为空';
+				}
 				formData[ data[i].name ] = data[i].value;
+				
 			}
+			
 			$.ajax( {
 				url:conf["url-a"],
 				type:form[0].method,
@@ -45,6 +53,7 @@ window.micro = function(conf) {
 		}
 	}
 };
+/* 笔记接口定义*/
 window.note = function(conf) {
 	var lineBackground =function(data) {
 		var i;
@@ -79,6 +88,7 @@ window.note = function(conf) {
 	}
 };
 $(function(){
+	/* 初始化接口和页面相关的设置 */
 	topicSearch({
 		"label-root":("#note-has-topic .note-area-head-label"),
 		"query-label-tpl":("#query-label-tpl"),
@@ -119,18 +129,21 @@ $(function(){
 		$('.microNote ul').addClass('hidden');
 		return false;
 	});
-
+	/* 微笔记 事件注册*/
 	$('.microNote-form>form').submit(function(){
+		var msg = micro.add()
+		if( msg ) {
+			alert(msg);
+			return false;
+		}
 		$(this).parent().hide();
 		$('.microNote ul').removeClass('hidden');
-		micro.add();
 		return false;
 	});
 	$('.microNote-form-closeIcon span').click(function() {
 		$('.microNote-form').hide();
 		$('.microNote ul').removeClass('hidden');
 	});
-	note.query();
 	micro.query();
 });
 

@@ -1,8 +1,14 @@
 from django.conf.urls.defaults import (patterns, include, url)
-from django.views.generic import DetailView
+from django.views.generic import (DetailView,ListView)
+from note.models import Note
 urlpatterns = patterns(
     'note.views',
-    url(r'^$','note_home'),
+    url(r'^$',ListView.as_view(
+          model=Note,
+          queryset = Note.objects.order_by("-id")[:10],
+          context_object_name ="notes",
+          template_name ="note-list.html"
+            )),
     url(r'^topic/(?P<topic>\w+)/$', 'note_topic'),
     url(r'^id/(?P<note_id>\d+)/$', 'note_id'),
     

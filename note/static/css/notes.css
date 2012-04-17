@@ -15,6 +15,18 @@
 .note-article-area li:hover{
 	opacity:0.7;
 }
+/* Search */
+
+#searchForm{padding:0; text-align:center;display:inline-block}
+#searchForm input[type=search] {
+    border:medium none;
+    width:100%; height:80%;  background-image:none;
+    -webkit-border-radius:2px; -moz-border-radius:2px; border-radius:2px;
+    -webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box;
+	background:#aaa;
+	color:#fff;
+} 
+#searchsubmit{ visibility:hidden;}
 .microNote{
 	float:right;
 	width:33%;

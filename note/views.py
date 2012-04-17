@@ -9,10 +9,11 @@ from note.mod import (mods,mod_sum,Mod)
 import json
 from django.core import serializers 
 from cgi import escape
-note_type_map= {
-    "0":"text_note.html",
-    "1":"color_note.html",
-}
+import pdb
+import logging as log
+log.basicConfig(level=log.INFO)
+
+
 #  decorators  begin
 #--- login-check---
 def login_check(func):
@@ -40,44 +41,37 @@ def doudou(request):
 
 # 定位笔记
 def note_id(request,note_id):
+#    pdb.set_trace()
     note = Note.objects.filter(id=note_id)
     c = {}
     if len(note)==0:
         tpl = "note_404.html"
         c["note"] = { "id":note_id }
     else:
-        note = note[0]
-        note_type = note.note_type
-        tpl = note_type_map[note_type]
-        note_mods = ( mods['basic']+ mods['head']+mods["footer"] ) 
-        c["note"] = note
-        c["mods"] = note_mods.to_template({
-                    "title":"秦木工的笔记",
-                    "menu":[("主页","/"),("笔记","/note/"),("新笔记","/note/add",)],
-                    "person_info":[("qinmugong","#"),("消息","#"),("设置","#"),]
-                    })
-    ## generate note view from d
-    t = loader.get_template( tpl )
+        tpl = "note_detail_text.html"
+        c["note"] = note[0]
+        
+    
+    t = loader.get_template( tpl  )
     req_c = RequestContext( request , c )
     req_c.autoescape=False
     return HttpResponse( t.render(req_c))
 # 查询主题 笔记主页
+""" 被 generic view 代替，但是当需要其他逻辑的时候还是需要generic view的实例
 @login_check
 @headers({'name':'jianpugang'})
 def note_home(request):
     
     t = loader.get_template("note-list.html")
     notes = Note.objects.order_by("-id")[:10]
-
-    note_mods = ( mods['basic']+mods['head'] + mods["footer"]) 
     c = RequestContext(
-        request,  { 
-            "notes-json":json.dumps (
-                list(notes),
-                default=lambda o :[o.id,o.topic] 
-                ) }
+        request,  
+        { 
+            'notes':notes,
+            }
         )
     return HttpResponse( t.render(c))
+"""
 def list_note(request):
     notes = Note.objects.order_by("-id")[:10]
     return HttpResponse( 
@@ -94,7 +88,6 @@ def query_topic(request):
     notes = Note.objects.filter(topic__contains=q['name']).order_by("-id")[:10]
     notes_list = list(notes)
     json_str = escape( json.dumps( notes_list,default=lambda o:[o.id,o.topic]))
-    print("==>")
     return HttpResponse( 
         json_str,
         mimetype='text/json'
@@ -125,20 +118,24 @@ def save_note(request):
     return HttpResponse( json.dumps(resp) )
 #创建新笔记
 def note_add(request):
-    t = loader.get_template("text_note.html")
-    note_mods = ( mods['basic']+mods['head'] + mods["footer"]) 
+    t = loader.get_template('note_detail_text.html')
+    c = {}
+    c['note'] = {
+        'topic':"新主题",
+        'note_type':'0',
+        'content':'编辑内容',
+        }
     c = RequestContext(
-        request,  { 
-            "mods":note_mods.to_template(
-                {
-                    "title":"秦木工的笔记",
-                    "menu":[("主页","/"),("木工的笔记","/note/"),("新笔记","/note/add",)],
-                    "person_info":[("qinmugong","#"),("消息","#"),("设置","#"),]
-                    }) ,
-            'topic':"新主题",
-            'note_type':'0',
-            'content':'编辑内容',
-            } )
+        request,  c)
+     
+    '''
+    note_mods.to_template(
+    {
+    "title":"秦木工的笔记",
+    "menu":[("主页","/"),("木工的笔记","/note/"),("新笔记","/note/add",)],
+    "person_info":[("qinmugong","#"),("消息","#"),("设置","#"),]
+    }) ,
+    '''
     return HttpResponse( t.render(c) )
 
 def query_micro(request):

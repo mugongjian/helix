@@ -7,17 +7,24 @@
 
 {%  block content %}
 <div class="note-article note-head-margin" >
-    <div id="late-10-note" class="note-article-area" >
+  <div id="late-10-note" class="note-article-area" >
 	<div class="note-area-head">
 	  <div class="label">最新的笔记</div>
 	</div>
 	<ul>
+	  {% for n in notes%}
+	  <li class="{% cycle gridLine1,gridLine2 %}"><a href="/note/id/{{n.id}}">{{n.topic}}</a></li>
+	  {% endfor%}
 	</ul>
-  </div>
-
+	</div>
+  
   <div id="note-has-topic" class="note-article-area">
 	<div class="note-area-head">
-	  <div class="label">搜索主题：</div>
+	  <div class="label">搜索主题：    
+		<form id="searchForm" action="/note/topic" method="GET">
+		  <input type="search"  placeholder="查询笔记"  size="35" maxlength="50" name="name" />
+		</form>
+      </div>
 	</div>
 	<ul></ul>
   </div>
@@ -32,21 +39,19 @@
   <ul></ul>
   <div class="microNote-form">
 	<form action="/note-micro/a/" method="POST">
-	  <div style="display:none">
 		{% csrf_token %}
 		<div class="microNote-form-closeIcon"><span >X</span></div>
 		<label >主题：</label>
-		<input name="topic" />
+		<input type="text" name="topic" />
 		<label>微语：</label>
 		<textarea name="word"></textarea>
 		<input type="submit" value="发布" />
 	</form>
-	</div>
   </div>
 </div>
 {% endblock content %}
 {% block js %}
-{% include "note-list-item.html" %}
+{% include "note-tmps.html" %}
 {{ block.super }}
 <script  src="{{STATIC_URL}}js/notes.js"></script>
 {% endblock js %}

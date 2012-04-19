@@ -1,0 +1,41 @@
+<html>
+<head>
+<style rel="stylesheet">
+         .demo-wrap {
+             position: relative;
+             margin-top: 20px;
+             height: 110px;
+         }
+         #demo-txt {
+             position: absolute;
+             left: 400px;
+             top: 0;
+             color:#333333;
+             font: normal 26px/2 Futura,"Century Gothic",AppleGothic,sans-serif;
+             opacity: 0;
+             filter: alpha(opacity=0);
+         }
+         #demo-img {
+             position: absolute;
+             left: 20px;
+             top: 20px;
+         }
+	 div {
+	 border: 1px solid red;
+	 }
+	 img {
+	 border :1px solid green;
+	 }
+     </style>
+</head>
+<body>
+<button type="button" id="demo-btn" autocomplete="off">Click Me!</button>
+     <div class="demo-wrap">
+         <img id="demo-img" src="http://docs.kissyui.com/logo/logo.png" />
+         <h2 id="demo-txt">Hello KISSY, NOT KITTY!</h2>
+     </div>
+
+<script src="http://use:8000/static/js/kissy.js"></script>
+<script src="/static/js/test.js"></script>
+</body>
+</html>

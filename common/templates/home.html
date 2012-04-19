@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% for css in mods.css %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/{{css}}">
+{% endfor %}
+</head>
+<body>
+{% for t in mods.tm %}
+{% include t %}
+{% endfor %}
+{% include 'footer.mod.html'%}
+{% for js in mods.js %}
+<script type="text/javascript" src="{{STATIC_URL}}js/{{js}}" ></script>
+{% endfor %}
+</body>
+</html>

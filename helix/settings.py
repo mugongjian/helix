@@ -105,6 +105,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'djangomako.middleware.MakoMiddleware',
 	# Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -112,6 +113,8 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'helix.urls'
 
 TEMPLATE_DIRS = (
+    ''' for mako template '''
+	'd:/file/helix/rest/templates',
     #os.path.join(PROJECT_PATH, "templates"),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
@@ -135,8 +138,7 @@ INSTALLED_APPS = (
     'note',
     'rest',
     'ask',
-	'common',
-
+    'common',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

@@ -8,6 +8,7 @@ from rest.models import Bookmark
 urlpatterns = patterns(
     "rest.views",
     (r"^user/$",dtt,{"template":"user_index.html"}),
+    (r'^to/$','mako_test'),
     (r'^images/$',dtt,{'template':'images.html'}),
     (r"^user/(?P<id>\d+)/$",dtt,{ "template":"user_detail.html"} ),
     (r"^user/goto/(?P<id>\d+)/$",rt,{ "url":"/rest/user/%(id)s/","permanent":False} ),

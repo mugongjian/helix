@@ -13,7 +13,7 @@
 	</div>
 	<ul>
 	  {% for n in notes%}
-	  <li class="{% cycle gridLine1,gridLine2 %}"><a href="/note/id/{{n.id}}">{{n.topic}}</a></li>
+	  <li class="{% cycle gridLine1,gridLine2 %}"><a href="/note/{{n.id}}/">{{n.topic}}</a></li>
 	  {% endfor%}
 	</ul>
 	</div>

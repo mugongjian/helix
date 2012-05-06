@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+
+article{
+margin-top:100px;
+}
+div,aside{
+float:left;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/try.css"/>
+</head>
+
+<body>
+<header>head</header>
+<article>
+<hgroup>hgroup</hgroup>
+<div>
+<section>
+{% for i in micros%}
+<p>{{i.id}}</p>
+{% endfor %}
+</section>
+<section>
+{% for i in object_list%}
+<p>{{i.topic}}</p>
+{% endfor %}
+</section>
+<div>
+<aside>aside</aside>
+</article>
+</body>
+</html>

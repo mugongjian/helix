@@ -8,13 +8,16 @@ class Mod:
             self.name.append(name+".mod.html")
         self.css=css
         self.js=js
+        
     def __str__(self):
         return str(self.name)
+    
     def __add__(self,other):
         self.name += other.name
         self.js +=other.js
         self.css += other.css
         return self
+    
     def to_template(self,cxt):
         return {
             "js" : self.__uniqe_list(self.js),
@@ -22,6 +25,7 @@ class Mod:
             "tm" : self.__uniqe_list(self.name),
             "cxt" : cxt,
             }
+        
     def __uniqe_list(self,lst):
         uniq=[]
         for x in lst:
@@ -31,10 +35,11 @@ class Mod:
 
 def mod_sum():
     return Module("",[],[])
+
 mods= {  
 "basic": Mod(
-        "basic",
-        ["reset.css","note-common.css"],
+                    "basic",
+        ["reset.css"   ,"note-common.css"],
         ["jquery-min.js","tpls.js"]
         ),
 "head": Mod(

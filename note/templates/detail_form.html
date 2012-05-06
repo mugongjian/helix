@@ -2,11 +2,11 @@
   
   <div class="topics"></div>
   <section >
-	<form   class="content-form" action="/note/sync/" method="POST">
+	<form   class="content-form" action="" method="POST">
 	  {% csrf_token %}
 	  <div class="hidden">
 		<input id="id" name="id"  value="{{note.id}}" />
-		<input id="note_type" name="note_type" value="0"/>
+		<input id="note_type" name="note_type" value="note.note_type"/>
 	  </div>
 	  <input id="topic" name="topic" value="{{note.topic}}" />
 	  <textarea id="content" name="content" >{{note.content}}</textarea>

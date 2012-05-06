@@ -1,7 +1,7 @@
 # Django settings for helix project.
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = False
 
 ADMINS = (
     ('qinmugong', 'silentpauljian@gmail.com'),
@@ -113,9 +113,8 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'helix.urls'
 
 TEMPLATE_DIRS = (
-    ''' for mako template '''
-	'd:/file/helix/rest/templates',
-    #os.path.join(PROJECT_PATH, "templates"),
+    # for mako 
+    'D:/file/helix/rest/templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -176,4 +175,7 @@ LOGGING = {
         },
     }
 }
-
+# disallow ua 
+#import re
+#DISALLOWED_USER_AGENTS=[re.compile('.*WebKit.*')]
+APPEND_SLASH=False

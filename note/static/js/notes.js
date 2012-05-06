@@ -106,7 +106,7 @@ $(function(){
 		"className":["gridLine1","gridLine2"]
 	});
 	micro = micro({
-		"url-q":"/note-micro/q",
+		"url-q":"/note-micro/q/",
 		"url-a":"/note-micro/a/",
 		"form": ('.microNote-form>form'),
 		"root":('.microNote>ul'),
@@ -114,7 +114,7 @@ $(function(){
 		"rainbowCls":["rainbow-red","rainbow-orange","rainbow-yellow","rainbow-green","rainbow-blue","rainbow-indigo","rainbow-puple"]
 	});
 	note = note({
-		"url-q":"/note/list",
+		"url-q":"/note/json/",
 		"list-root":("#late-10-note>ul"),
 		"tpl":("#note-item-tpl"),
 		"className":["gridLine1","gridLine2"]

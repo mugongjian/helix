@@ -2,8 +2,8 @@
 from django.http import HttpResponse
 from note.models import (Note,Piece)
 from django.template import (loader,Context,RequestContext)
-
-from django.shortcuts import render_to_response as r2r
+from django.views.generic.simple import redirect_to
+from django.shortcuts import render
 from django.http import Http404
 from note.mod import (mods,mod_sum,Mod)
 import json
@@ -11,8 +11,9 @@ from django.core import serializers
 from cgi import escape
 import pdb
 import logging as log
+from django.views.generic import (DetailView,ListView)
+ 
 log.basicConfig(level=log.INFO)
-
 
 #  decorators  begin
 #--- login-check---
@@ -31,6 +32,43 @@ def headers(conf):
             return func(request)
         return wrapper
     return wrap_response
+
+# decorator 
+def add_with_preprocess(template_url, detail_url_template):
+    """
+    add 操作 post 和 get
+    """
+    def decorator(func):
+        def wrapper(request, *args):
+            if request.method == 'GET':
+                blank_note = {
+                           'topic':"新主题",
+                           'note_type':'0',
+                           'content':'编辑内容'
+                           }
+                return render(request, template_url, {'note':blank_note})
+            elif request.method == 'POST':
+                obj = func(request, *args)
+                return redirect_to(request, detail_url_template.replace('{id}', str(obj.id)))
+        return wrapper
+    return decorator
+
+def edit_with_preprocess(before_template_url, detail_url_template):
+    """
+    
+    """
+    def decorator(func):
+        def wrapper(request, pk):
+            if request.method == 'GET':
+                obj = Note.objects.get(id=pk)
+                return render(request, before_template_url, {'note':obj})
+            elif request.method == 'POST':
+                func(request, pk)
+                return redirect_to(request, detail_url_template.replace('{id}', str(pk)))
+        return wrapper
+    return decorator
+
+
 #decorators end
 
 def doudou(request):
@@ -117,27 +155,22 @@ def save_note(request):
         resp['id'] = note.id
     return HttpResponse( json.dumps(resp) )
 #创建新笔记
-def note_add(request):
-    t = loader.get_template('note_detail_text.html')
-    c = {}
-    c['note'] = {
-        'topic':"新主题",
-        'note_type':'0',
-        'content':'编辑内容',
-        }
-    c = RequestContext(
-        request,  c)
-     
-    '''
-    note_mods.to_template(
-    {
-    "title":"秦木工的笔记",
-    "menu":[("主页","/"),("木工的笔记","/note/"),("新笔记","/note/add",)],
-    "person_info":[("qinmugong","#"),("消息","#"),("设置","#"),]
-    }) ,
-    '''
-    return HttpResponse( t.render(c) )
+@add_with_preprocess('note_detail_text.html','/note/{id}/')
+def add_note(request):
+    note = Note.objects.create(
+            content = request.POST['content'],
+            topic = request.POST['topic'],
+            note_type="0" );
+    return note
 
+@edit_with_preprocess('note_detail_text.html','/note/{id}/')
+def edit_note(request, pk):
+    note = Note.objects.get(id=pk)
+    for i in ['topic', 'content']:
+        setattr(note, i, request.POST[i])
+    note.save()
+    return note
+ 
 def query_micro(request):
     pieces = Piece.objects.all().order_by("-id")[:10]
     pieces_list = list(pieces)
@@ -184,16 +217,17 @@ def topic_micro( request,**kw ):
     return HttpResponse( t.render(c) )
 
 
-def date_micro(req1uest,**kw):
+def date_micro(request, **kw):
     return HttpResponse("yy")
-def try__(request):
-    '''
-    dir_request = str( dir(request) )+"<br>";
-    dir_cookies = str(dir(request.COOKIES))+"<br>";
-    dir_files = str(dir(request.FILES))+"<br>";
-    dir_meta = str(dir(request.META.keys()))+"<br>";
-    dir_request_request = str(dir(request.REQUEST))+"<br>";
-    '''
-    print("try views")
-    return HttpResponse( r2r("doudou.html",{'doudou':'doudou'}) )
 
+
+class TryView(ListView):
+    
+    model = Piece
+    def get_queryset(self):
+        return ListView.get_queryset(self)
+    
+    def get_context_data(self, **kwargs):
+        context = super(TryView, self).get_context_data(**kwargs)
+        context['micros'] = Piece.objects.order_by('-id')[:10]
+        return context

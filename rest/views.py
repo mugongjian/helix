@@ -11,8 +11,10 @@ from django.template import(loader,Context,RequestContext)
 import os
 
 from djangomako.shortcuts import (render_to_response,render_to_string)
+
 def mako_test(request):
     return render_to_response('mako.html',{'user':'paul'})
+
 def model_test(request):
     form = BookmarkForm()
     #return r2r("bookmark-form.html",

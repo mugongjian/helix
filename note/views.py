@@ -1,17 +1,15 @@
 #coding:utf-8
-from django.http import HttpResponse
-from note.models import (Note,Piece)
-from django.template import (loader,Context,RequestContext)
-from django.views.generic.simple import redirect_to
-from django.shortcuts import render
-from django.http import Http404
-from note.mod import (mods,mod_sum,Mod)
-import json
-from django.core import serializers 
 from cgi import escape
-import pdb
+from django.core import serializers
+from django.http import Http404, HttpResponse
+from django.shortcuts import render
+from django.template import loader, Context, RequestContext
+from django.views.generic import DetailView, ListView
+from django.views.generic.simple import redirect_to
+from note.mod import mods, mod_sum, Mod
+from note.models import Note, Piece
+import json
 import logging as log
-from django.views.generic import (DetailView,ListView)
  
 log.basicConfig(level=log.INFO)
 
@@ -36,19 +34,23 @@ def headers(conf):
 # decorator 
 def add_with_preprocess(template_url, detail_url_template):
     """
-    add 操作 post 和 get
+	add 操作 post 和 get
     """
     def decorator(func):
         def wrapper(request, *args):
+            template = template_url
+            if 'request' in request.GET:
+                if 'ajax' == request.GET['request']:
+                    #template_url = template_url
+                    template = 'json.html'
+                    ajax = True
             if request.method == 'GET':
-                blank_note = {
-                           'topic':"新主题",
-                           'note_type':'0',
-                           'content':'编辑内容'
-                           }
-                return render(request, template_url, {'note':blank_note})
-            elif request.method == 'POST':
+                blank_note = {'topic':"新主题", 'note_type':'0', 'content':'编辑内容'}
+                return render(request, template, {'note':blank_note})
+            if request.method == 'POST':
                 obj = func(request, *args)
+                if ajax:
+                    return render(request,template,{'data':obj,'status':'ok'})
                 return redirect_to(request, detail_url_template.replace('{id}', str(obj.id)))
         return wrapper
     return decorator
@@ -72,14 +74,10 @@ def edit_with_preprocess(before_template_url, detail_url_template):
 #decorators end
 
 def doudou(request):
-    return HttpResponse(
-        r2r('doudou.html',
-            {'doudou':'田慧娟'}
-            ))
+    return HttpResponse([i for i in request.GET.iteritems()])
 
 # 定位笔记
 def note_id(request,note_id):
-#    pdb.set_trace()
     note = Note.objects.filter(id=note_id)
     c = {}
     if len(note)==0:

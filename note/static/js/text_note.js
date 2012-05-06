@@ -55,7 +55,7 @@ mode['add'] = {
 		}
 		delete data.id;
 		$.ajax ( {
-			url:this.action,
+			url:this.action+'?request=ajax',
 			type:this.method,
 			data:data,
 			success:mode['add'].onAddSuccess

@@ -5,7 +5,7 @@ from django.views.generic import ListView
 from django.views.generic import CreateView
 
 from note.models import Note
-from note.views import TryView
+from note.views import AddNoteView
 
 
 urlpatterns = patterns(
@@ -14,9 +14,9 @@ urlpatterns = patterns(
     queryset=Note.objects.order_by("-id")[:10],\
     context_object_name="notes",\
     template_name="note/note_list.html")),
-    (r'^add$', 'add_note'),
+    (r'^add$', AddNoteView.as_view()),
     (r'^(?P<pk>\d+)/$', DetailView.as_view(\
-    template_name='note_detail_text.html',\
+    template_name='note/detail_text.html',\
     model=Note,\
     context_object_name='note')),
     (r'^(?P<pk>\d+)/edit$', 'edit_note'),
@@ -30,7 +30,6 @@ urlpatterns = patterns(
     (r'^t/(?P<topic>[\w\-]+)/$', 'topic_micro'),
     (r'^d/$', 'date_micro'),
     (r'^doudou$', 'doudou'),
-    (r'^try/$', TryView.as_view()),
-    (r'^new$', CreateView.as_view())
+    (r'^new$', CreateView.as_view()),
 
 )

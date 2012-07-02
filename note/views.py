@@ -243,6 +243,6 @@ class TryView(ListView):
         return context
 
 
-class NoteCreateView(CreateView):
-        #form_class = 'note/note_form.html'
+class AddNoteView(CreateView):
+        template_name = 'note/note_form.html'
         form_class = NoteForm

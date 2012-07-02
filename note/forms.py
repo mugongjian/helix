@@ -3,4 +3,5 @@ from django import forms
 
 
 class NoteForm(forms.Form):
-    topic = forms.CharField()
+    title = forms.CharField(max_length=50)
+    content = forms.CharField(max_length=300)

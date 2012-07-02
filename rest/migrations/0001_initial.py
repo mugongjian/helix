@@ -1,16 +1,16 @@
-# encoding: utf-8
+# -*- coding: utf-8 -*-
 import datetime
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
         # Adding model 'Tag'
         db.create_table('rest_tag', (
-            ('name', self.gf('django.db.models.fields.SlugField')(max_length=100, primary_key=True, db_index=True)),
+            ('name', self.gf('django.db.models.fields.SlugField')(max_length=100, primary_key=True)),
         ))
         db.send_create_signal('rest', ['Tag'])
 
@@ -34,9 +34,7 @@ class Migration(SchemaMigration):
         ))
         db.create_unique('rest_bookmark_tags', ['bookmark_id', 'tag_id'])
 
-
     def backwards(self, orm):
-        
         # Deleting model 'Tag'
         db.delete_table('rest_tag')
 
@@ -45,7 +43,6 @@ class Migration(SchemaMigration):
 
         # Removing M2M table for field tags on 'Bookmark'
         db.delete_table('rest_bookmark_tags')
-
 
     models = {
         'auth.group': {
@@ -97,7 +94,7 @@ class Migration(SchemaMigration):
         },
         'rest.tag': {
             'Meta': {'object_name': 'Tag'},
-            'name': ('django.db.models.fields.SlugField', [], {'max_length': '100', 'primary_key': 'True', 'db_index': 'True'})
+            'name': ('django.db.models.fields.SlugField', [], {'max_length': '100', 'primary_key': 'True'})
         }
     }
 

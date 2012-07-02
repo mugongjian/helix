@@ -1,11 +1,14 @@
-{% extends "base-note.html" %}
+{% extends "note/app_base.html" %}
+
 {% block css %}
 {{ block.super }}
 <link href="{{STATIC_URL}}css/text_note.css" rel="stylesheet" >
 {% endblock css %}
+
 {% block content %}
-{% include "detail_form.html" %}
+{% include "note/detail_form.html" %}
 {% endblock content %}
+
 {% block js %}
 {{block.super}}
 <script  src="{{STATIC_URL}}js/text_note.js" ></script>

@@ -1,7 +1,6 @@
 #coding=utf-8
-from django.forms import ModelForm
-from note.models import Note
+from django import forms
 
-class NoteForm(ModelForm):
-    class Meta:
-        model = Note
+
+class NoteForm(forms.Form):
+    topic = forms.CharField()

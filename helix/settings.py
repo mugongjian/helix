@@ -11,12 +11,19 @@ MANAGERS = ADMINS
 
 DATABASES = {
         'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'Big0',                      # Or path to database file if using sqlite3.
-        'USER': 'jpg',                      # Not used with sqlite3.
-        'PASSWORD': 'j',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
+        # Add 'postgresql_psycopg2', 'postgresql',
+        # 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.sqlite3',
+        # Or path to database file if using sqlite3.
+        'NAME': '__data__',
+        # Not used with sqlite3.
+        'USER': 'jpg',
+        # Not used with sqlite3.
+        'PASSWORD': 'j',
+        # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': '',
+        # Set to empty string for default. Not used with sqlite3.
+        'PORT': '3306',
     }
 }
 
@@ -27,7 +34,8 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'Asia/Shanghai'#'America/Chicago'
+#'America/Chicago'
+TIME_ZONE = 'Asia/Shanghai'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -106,16 +114,23 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'djangomako.middleware.MakoMiddleware',
-	# Uncomment the next line for simple clickjacking protection:
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
+# Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'helix.urls'
 
+import debug_toolbar
+debug_templates = debug_toolbar.__path__[0] + '/templates'
+
 TEMPLATE_DIRS = (
-    # for mako 
-    'D:/file/helix/rest/templates',
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    debug_templates,
+    # for mako
+    #'D:/file/helix/rest/templates',
+    # Put strings here, like "/home/html/django_templates" or
+    # "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
@@ -128,16 +143,17 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-        
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-        
+    'south',
     'django.contrib.admindocs',
-    'topic',
+    #'topic',
     'note',
     'rest',
-    'ask',
+    #'ask',
     'common',
+    'debug_toolbar',
+    'main',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -156,7 +172,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-	'filters': {
+    'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
         }
@@ -164,7 +180,8 @@ LOGGING = {
     'handlers': {
         'console': {
             'level': 'ERROR',
-            'class': 'logging.StreamHandler'#'django.utils.log.AdminEmailHandler'
+            # django.utils.log.AdminEmailHandler
+            'class': 'logging.StreamHandler',
         }
     },
     'loggers': {
@@ -175,7 +192,22 @@ LOGGING = {
         },
     }
 }
-# disallow ua 
+
+# disallow ua
 #import re
 #DISALLOWED_USER_AGENTS=[re.compile('.*WebKit.*')]
-APPEND_SLASH=False
+APPEND_SLASH = False
+
+INTERNAL_IPS = ('127.0.0.1',)
+
+DEBUG_TOOLBAR_PANELS = (
+    #'debug_toolbar.panels.version.VersionDebugPanel',
+    #'debug_toolbar.panels.timer.TimerDebugPanel',
+    #'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+    #'debug_toolbar.panels.headers.HeaderDebugPanel',
+    #'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+    'debug_toolbar.panels.template.TemplateDebugPanel',
+    #'debug_toolbar.panels.sql.SQLDebugPanel',
+    #'debug_toolbar.panels.signals.SignalDebugPanel',
+    #'debug_toolbar.panels.logger.LoggingPanel',
+)

@@ -16,7 +16,4 @@ class Bookmark(models.Model):
     public = models.BooleanField()
     tags = models.ManyToManyField(Tag)
 
-class BookmarkForm(ModelForm):
-    class Meta:
-        model = Bookmark
 
